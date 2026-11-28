@@ -13,11 +13,11 @@ export const authGuard: CanActivateFn = () => {
 export const adminGuard: CanActivateFn = () => {
   const lS = inject(Loginservice);
   const router = inject(Router);
-  return lS.esAdmin() ? true : router.createUrlTree(['/inicio']);
+  return lS.esAdmin() ? true : router.createUrlTree(['/']);
 };
 
 export const adminStaffGuard: CanActivateFn = () => {
   const lS = inject(Loginservice);
   const router = inject(Router);
-  return lS.esAdminOStaff() ? true : router.createUrlTree(['/inicio']);
+  return lS.esAdminOStaff() ? true : router.createUrlTree(['/']);
 };

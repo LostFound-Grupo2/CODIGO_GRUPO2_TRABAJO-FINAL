@@ -38,7 +38,7 @@ export class Logincomponent {
     this.lS.login(this.form.value).subscribe({
       next: () => {
         this.cargando.set(false)
-        this.router.navigate(['/inicio'])
+        this.router.navigate(['/'])
       },
       error: (err) => {
         this.cargando.set(false)

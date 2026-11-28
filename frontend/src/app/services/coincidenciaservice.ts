@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CoincidenciaDTO, CoincidenciaInsertDTO } from '../models/CoincidenciaDTO';
-import { SumaSimilitudEstadoDTO } from '../models/SumaSimilitudEstadoDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -31,9 +30,5 @@ export class Coincidenciaservice {
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiURL}/${id}`);
-  }
-
-  obtenerSumaSimilitudPorEstado(): Observable<SumaSimilitudEstadoDTO[]> {
-    return this.http.get<SumaSimilitudEstadoDTO[]>(`${this.apiURL}/suma-similitud-estado`);
   }
 }

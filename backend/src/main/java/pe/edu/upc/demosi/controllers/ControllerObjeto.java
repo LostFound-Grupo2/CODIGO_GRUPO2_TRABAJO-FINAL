@@ -14,14 +14,12 @@ import pe.edu.upc.demosi.dtos.BusquedaTextoDTO;
 import pe.edu.upc.demosi.dtos.ObjetoCategoriaDTCList;
 import pe.edu.upc.demosi.entities.Categoria;
 import pe.edu.upc.demosi.entities.Objeto;
-import pe.edu.upc.demosi.servicesinterfaces.ICoincidenciaAutomaticaService;
 import pe.edu.upc.demosi.servicesinterfaces.ICategoriaService;
 import pe.edu.upc.demosi.servicesinterfaces.IIaService;
 import pe.edu.upc.demosi.servicesinterfaces.IObjetoService;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Objetos")
@@ -30,11 +28,8 @@ public class ControllerObjeto {
     private final ICategoriaService cS;
     private final ModelMapper modelMapper;
     private final IIaService iaS; // HUF17 / HUF19
-    private final ICoincidenciaAutomaticaService caS; // Notificaciones automáticas
 
-    public ControllerObjeto(IObjetoService oS, ModelMapper modelMapper,ICategoriaService cS, IIaService iaS,
-                            ICoincidenciaAutomaticaService caS) {
-        this.caS = caS;
+    public ControllerObjeto(IObjetoService oS, ModelMapper modelMapper,ICategoriaService cS, IIaService iaS) {
         this.oS = oS;
         this.cS=cS;
         this.modelMapper = modelMapper;
@@ -113,12 +108,6 @@ public class ControllerObjeto {
         objeto.setFotoObjeto(dto.getFotoObjeto());
         objeto.setDescripcionIaObjeto(iaS.describirImagen(dto.getFotoObjeto()));
         oS.insert(objeto); // save() actualiza porque ya tiene id
-        // La nueva descripción IA puede generar coincidencias nuevas
-        try {
-            caS.procesarObjeto(id);
-        } catch (Exception e) {
-            // la foto igual queda guardada
-        }
         return ResponseEntity.ok(modelMapper.map(objeto, ObjetoDTCList.class));
     }
 
