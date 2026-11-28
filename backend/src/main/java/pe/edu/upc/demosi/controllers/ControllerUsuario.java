@@ -3,19 +3,17 @@ package pe.edu.upc.demosi.controllers;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pe.edu.upc.demosi.dtos.UsuarioActivoDTCList;
 import pe.edu.upc.demosi.dtos.UsuarioDTCList;
 import pe.edu.upc.demosi.dtos.UsuarioDTCinsert;
-import pe.edu.upc.demosi.dtos.UsuarioActivoDTCList;
 import pe.edu.upc.demosi.entities.Rol;
 import pe.edu.upc.demosi.entities.Usuario;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.IRolService;
 import pe.edu.upc.demosi.servicesinterfaces.IUsuarioService;
-import org.modelmapper.ModelMapper;
 
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -36,10 +34,10 @@ public class ControllerUsuario {
         this.rS = rS;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
-    }
+   }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioDTCList>> listar() {
         List<UsuarioDTCList> lista = uS.list()
                 .stream()
@@ -49,7 +47,7 @@ public class ControllerUsuario {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UsuarioDTCList> registrar(@Valid @RequestBody UsuarioDTCinsert dto) {
 
         Rol rol = rS.listId(dto.getIdRol())
@@ -78,7 +76,7 @@ public class ControllerUsuario {
 
     // HU46: listar usuarios activos
     @GetMapping("/activos")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioActivoDTCList>> listarActivos() {
         List<UsuarioActivoDTCList> lista = uS.listarActivos()
                 .stream()
@@ -97,7 +95,7 @@ public class ControllerUsuario {
 
     // HU47: listar usuarios activos con su rol
     @GetMapping("/activos-con-rol")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioDTCList>> listarActivosConRol() {
         return ResponseEntity.ok(uS.listarActivosConRol());
     }
