@@ -11,6 +11,7 @@ import pe.edu.upc.demosi.entities.EstadoReporte;
 import pe.edu.upc.demosi.entities.Objeto;
 import pe.edu.upc.demosi.entities.Reporte;
 import pe.edu.upc.demosi.entities.Usuario;
+import pe.edu.upc.demosi.dtos.TotalDTO;
 import pe.edu.upc.demosi.exceptions.ResourceNotFoundException;
 import pe.edu.upc.demosi.servicesinterfaces.IEstadoReporteService;
 import pe.edu.upc.demosi.servicesinterfaces.IObjetoService;

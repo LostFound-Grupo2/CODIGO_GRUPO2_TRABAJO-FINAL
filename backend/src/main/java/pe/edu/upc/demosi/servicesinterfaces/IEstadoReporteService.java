@@ -1,6 +1,7 @@
 package pe.edu.upc.demosi.servicesinterfaces;
 
 import pe.edu.upc.demosi.entities.EstadoReporte;
+import pe.edu.upc.demosi.entities.Notificacion;
 
 
 import java.util.List;
